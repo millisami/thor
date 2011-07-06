@@ -228,10 +228,10 @@ class Thor
     # ==== Example
     #
     #   inside('vendor') do
-    #     run('ln -s ~/edge rails')
+    #     run_cmd('ln -s ~/edge rails')
     #   end
     #
-    def run(command, config={})
+    def run_cmd(command, config={})
       return unless behavior == :invoke
 
       destination = relative_to_original_destination_root(destination_root, false)
@@ -242,7 +242,7 @@ class Thor
         command = "#{config[:with]} #{command}"
       end
 
-      say_status :run, desc, config.fetch(:verbose, true)
+      say_status :run_cmd, desc, config.fetch(:verbose, true)
 
       unless options[:pretend]
         config[:capture] ? `#{command}` : system("#{command}")
@@ -257,7 +257,7 @@ class Thor
     #
     def run_ruby_script(command, config={})
       return unless behavior == :invoke
-      run command, config.merge(:with => Thor::Util.ruby_command)
+      run_cmd command, config.merge(:with => Thor::Util.ruby_command)
     end
 
     # Run a thor command. A hash of options can be given and it's converted to
@@ -288,7 +288,7 @@ class Thor
       args.push Thor::Options.to_switches(config)
       command = args.join(' ').strip
 
-      run command, :with => :thor, :verbose => verbose, :pretend => pretend, :capture => capture
+      run_cmd command, :with => :thor, :verbose => verbose, :pretend => pretend, :capture => capture
     end
 
     protected

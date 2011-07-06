@@ -115,7 +115,7 @@ class Thor
 
       unless current.include?(task.name)
         current << task.name
-        task.run(self, *args)
+        task.run_cmd(self, *args)
       end
     end
 

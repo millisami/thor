@@ -243,26 +243,26 @@ describe Thor::Actions do
     end
   end
 
-  describe "#run" do
+  describe "#run_cmd" do
     before(:each) do
       runner.should_receive(:system).with("ls")
     end
 
     it "executes the command given" do
-      action :run, "ls"
+      action :run_cmd, "ls"
     end
 
     it "logs status" do
-      action(:run, "ls").should == "         run  ls from \".\"\n"
+      action(:run_cmd, "ls").should == "         run_cmd  ls from \".\"\n"
     end
 
     it "does not log status if required" do
-      action(:run, "ls", :verbose => false).should be_empty
+      action(:run_cmd, "ls", :verbose => false).should be_empty
     end
 
     it "accepts a color as status" do
-      runner.shell.should_receive(:say_status).with(:run, 'ls from "."', :yellow)
-      action :run, "ls", :verbose => :yellow
+      runner.shell.should_receive(:say_status).with(:run_cmd, 'ls from "."', :yellow)
+      action :run_cmd, "ls", :verbose => :yellow
     end
   end
 
@@ -277,7 +277,7 @@ describe Thor::Actions do
     end
 
     it "logs status" do
-      action(:run_ruby_script, "script.rb").should == "         run  jruby script.rb from \".\"\n"
+      action(:run_ruby_script, "script.rb").should == "         run_cmd  jruby script.rb from \".\"\n"
     end
 
     it "does not log status if required" do
@@ -306,7 +306,7 @@ describe Thor::Actions do
 
     it "logs status" do
       runner.should_receive(:system).with("thor list")
-      action(:thor, :list).should == "         run  thor list from \".\"\n"
+      action(:thor, :list).should == "         run_cmd  thor list from \".\"\n"
     end
 
     it "does not log status if required" do

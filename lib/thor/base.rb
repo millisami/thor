@@ -16,7 +16,7 @@ class Thor
 
   # Thor methods that should not be overwritten by the user.
   THOR_RESERVED_WORDS = %w(invoke shell options behavior root destination_root relative_root
-                           action add_file create_file in_root inside run run_ruby_script)
+                           action add_file create_file in_root inside run_cmd run_ruby_script)
 
   module Base
     attr_accessor :options, :args

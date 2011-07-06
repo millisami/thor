@@ -17,7 +17,7 @@ class Thor
 
     # By default, a task invokes a method in the thor class. You can change this
     # implementation to create custom tasks.
-    def run(instance, args=[])
+    def run_cmd(instance, args=[])
       if private_method?(instance)
         instance.class.handle_no_task_error(name)
       elsif public_method?(instance)
@@ -118,7 +118,7 @@ class Thor
       super(name.to_s, "A dynamically-generated task", name.to_s, name.to_s, options)
     end
 
-    def run(instance, args=[])
+    def run_cmd(instance, args=[])
       if (instance.methods & [name.to_s, name.to_sym]).empty?
         super
       else

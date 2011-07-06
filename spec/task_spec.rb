@@ -37,7 +37,7 @@ describe Thor::Task do
     it "does not invoke an existing method" do
       mock = mock()
       mock.class.should_receive(:handle_no_task_error).with("to_s")
-      Thor::DynamicTask.new('to_s').run(mock)
+      Thor::DynamicTask.new('to_s').run_cmd(mock)
     end
   end
 
@@ -49,11 +49,11 @@ describe Thor::Task do
     end
   end
 
-  describe "#run" do
+  describe "#run_cmd" do
     it "runs a task by calling a method in the given instance" do
       mock = mock()
       mock.should_receive(:can_has).and_return {|*args| args }
-      task.run(mock, [1, 2, 3]).should == [1, 2, 3]
+      task.run_cmd(mock, [1, 2, 3]).should == [1, 2, 3]
     end
 
     it "raises an error if the method to be invoked is private" do
@@ -68,7 +68,7 @@ describe Thor::Task do
         end
       end
 
-      task.run(klass.new).should == "can_has"
+      task.run_cmd(klass.new).should == "can_has"
     end
   end
 end
